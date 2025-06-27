@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -8,8 +9,7 @@ CORS(app)
 def process_video():
     data = request.json
     video_url = data.get("url")
-
-    # Dummy data (replace with actual logic)
+    
     return jsonify({
         "summary": "This video is about something very interesting.",
         "script": "Full transcription of the video goes here.",
@@ -18,4 +18,5 @@ def process_video():
     })
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
